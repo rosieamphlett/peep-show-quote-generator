@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './components/Header';
+import Button from './components/Button';
+import QuoteBox from './components/QuoteBox';
+import quotes from './data/quotes';
 import './App.css';
 
 class App extends Component {
+  state = {
+    index: 0,
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header />
+        <Button randomise={this.randomiseQuote} />
+        <QuoteBox quote={quotes[this.state.index]}/>
       </div>
     );
   }
+
+  randomiseQuote = () => {
+    this.setState({
+      index: Math.floor(Math.random() * (quotes.length))
+    })
+  }
+
 }
 
 export default App;
